@@ -1,47 +1,55 @@
-# Projeto-SuperMarkt
-Projeto para estudo sobre um mercado 
+# 🛒 Projeto-SuperMarkt
 
-🔵 . Objetivo do Projeto
-Criar uma análise exploratória completa das vendas de um supermercado usando SQL e DataViz, aplicando técnicas aprendidas nos cursos Google.
-________________________________________
-🟢 . Perguntas de negócio 
+Projeto de estudo sobre um supermercado, com análise exploratória de vendas usando **SQL** e **Data Visualization**, aplicando técnicas aprendidas nos cursos do Google.
 
+---
 
+## 🎯 Objetivo do Projeto
+Criar uma análise completa das vendas do supermercado, identificando padrões de compra, comportamento dos clientes e insights para tomada de decisão.
 
-1. Qual filial vende mais? Filial de Nova York
-2. Quais dias da semana têm maior faturamento? Sabado é o dia com maior valor de vendas
-3. Quais linhas de produto são mais vendidas?Office Suplies
-4. Qual é o ticket médio por categoria? Tech = 544.73 Furniture = 421.92 Office Supplies = 191.899
-5.  Qual segmento que gera mais vendas ?
-6. Qual categoria tem maior numero de pedido ? Office Suplies
-7.   Qual a media de dias entra a data da ordem e data de envio
+---
 
+## 🟢 Perguntas de Negócio
 
+| Pergunta | Resposta |
+|-----------|----------|
+| Qual filial vende mais? | Nova York |
+| Quais dias da semana têm maior faturamento? | Sábado |
+| Quais linhas de produto são mais vendidas? | Office Supplies |
+| Ticket médio por categoria | Tech: 544.73<br>Furniture: 421.92<br>Office Supplies: 191.90 |
+| Qual segmento gera mais vendas? |Tecnologia|
+| Qual categoria tem maior número de pedidos? | Office Supplies |
+| Média de dias entre ordem e envio | 4 |
 
+---
 
-________________________________________
-🟠 . Limpeza de dados (Prepare Data)
-Aplicará:
-•	TRIM() → limpar texto
-•	SUBSTR() → corrigir city, códigos etc
-•	LENGTH() → detectar inconsistências
-•	CAST() → transformar preço (string → real)
-•	DISTINCT → remover duplicatas na consulta
-•	DATE() → extrair data
-•	COALESCE() → lidar com valores nulos
-________________________________________
-🟤 . Transformações SQL
-Criação de colunas:
-•	receita total
-•	receita por produto
-•	mês
-•	dia da semana
-•	hora da compra
-•	ticket médio por cliente
-________________________________________
-🟡 . Análises SQL principais
-  CONSULTA PARA VERIFICAR QUAL A CIDADE QUE MAIS VENDE
-```
+## 🟠 Limpeza de Dados (Prepare Data)
+Técnicas aplicadas:
+
+- `TRIM()` → remover espaços desnecessários  
+- `SUBSTR()` → corrigir cidades, códigos etc.  
+- `LENGTH()` → detectar inconsistências  
+- `CAST()` → transformar preços (string → real)  
+- `DISTINCT` → remover duplicatas  
+- `DATE()` → extrair data  
+- `COALESCE()` → lidar com valores nulos  
+
+---
+
+## 🟤 Transformações SQL
+Colunas e métricas criadas:
+
+- Receita total  
+- Dia da semana  
+- Ticket médio 
+
+---
+
+## 🟡 Principais Consultas SQL
+
+### 1️⃣ Qual a cidade que mais vende?
+
+```sql
 SELECT  
     cidade,
     SUM(vendas) AS totalVendas
@@ -50,23 +58,23 @@ FROM
 GROUP BY
     cidade 
 ORDER BY 
-    vendas DESC
-```
-CONSULTA PRA VER QUAL DIA DA SEMANA TEM MAIOR VENDA
+    totalVendas DESC;
+2️⃣ Qual dia da semana tem maior faturamento?
+sql
+Copiar código
 SELECT   
-        ```
-CASE strftime('%w', 
+    CASE strftime('%w', 
         substr(dataOrdem, 7,4) || '-' || 
         substr(dataOrdem, 4,2) || '-' || 
         substr(dataOrdem, 1,2))
-            WHEN '0' THEN 'Domingo'
-            WHEN '1' THEN 'Segunda-feira'
-            WHEN '2' THEN 'Terça-feira'
-            WHEN '3' THEN 'Quarta-feira'
-            WHEN '4' THEN 'Quinta-feira'
-            WHEN '5' THEN 'Sexta-feira'
-            WHEN '6' THEN 'Sábado'
-        END AS nome_dia,
+        WHEN '0' THEN 'Domingo'
+        WHEN '1' THEN 'Segunda-feira'
+        WHEN '2' THEN 'Terça-feira'
+        WHEN '3' THEN 'Quarta-feira'
+        WHEN '4' THEN 'Quinta-feira'
+        WHEN '5' THEN 'Sexta-feira'
+        WHEN '6' THEN 'Sábado'
+    END AS nome_dia,
     SUM(vendas) AS total_vendas
 FROM
     supermercado
@@ -74,9 +82,9 @@ GROUP BY
     nome_dia
 ORDER BY
     total_vendas DESC;
-```
-CONSULTA PARA VER QUAL A CATEGORIA QUE TEM O MAIOR VALOR DE VENDAS
-```
+3️⃣ Qual categoria tem maior valor de vendas?
+sql
+Copiar código
 SELECT 
     categoriaProduto,
     SUM(vendas) AS totalVendas
@@ -85,18 +93,27 @@ FROM
 GROUP BY
     categoriaProduto
 ORDER BY 
-    totalvendas DESC;
-```
-________________________________________
-🟩 . Dashboard ( Looker Studio )
-•	 filial com mais faturamento
-•	Modo de envio mais ulitilizada
-•	Ticket médio de vendas
-•	Vendas por categoria
-________________________________________
-🟧 . Storytelling (Insights do negócio)
+    totalVendas DESC;
+🟩 Dashboard (Looker Studio)
+Principais métricas e visualizações:
 
-•	Filial de Nova York é a mais rentavel.
-•	Vendas ao Sabado são mais altas.
-•	A categoria de envio mais ultilizada é a Standart por conta de seu custo-beneficio
-•	“Electronic Accessories” é a linha mais lucrativa.
+🏢 Filial com maior faturamento
+
+📦 Método de envio mais utilizado
+
+💰 Ticket médio de vendas
+
+🛍️ Vendas por categoria
+
+🟧 Insights do Negócio (Storytelling)
+🏢 A filial de Nova York é a mais rentável.
+
+📅 Sábado é o dia com maior faturamento.
+
+🚚 O método de envio mais utilizado é Standard, pelo custo-benefício.
+
+💻 A linha mais lucrativa é Electronic Accessories.
+
+
+
+
