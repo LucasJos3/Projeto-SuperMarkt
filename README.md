@@ -46,7 +46,7 @@ Colunas e métricas criadas:
 ---
 ## 📊 Dashboard no Looker Studio
 
-👉 [Clique aqui para ver o Dashboard](https://lookerstudio.google.com/u/0/reporting/SEU_LINK_AQUI)
+👉 [Clique aqui para ver o Dashboard] https://lookerstudio.google.com/s/kqPTB_TFeJY
 
 
 ## 🟡 Principais Consultas SQL
