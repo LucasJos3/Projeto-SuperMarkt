@@ -44,6 +44,7 @@ Colunas e métricas criadas:
 - Ticket médio 
 
 ---
+<iframe width="100%" height="500" src="[URL_DO_LOOKER](https://lookerstudio.google.com/s/kqPTB_TFeJY)" frameborder="0"></iframe>
 
 ## 🟡 Principais Consultas SQL
 
