@@ -1,123 +1,109 @@
-# 🛒 Projeto-SuperMarkt
+# 📊 Supermarket Sales Analysis (2015–2018)
 
-Projeto de estudo sobre um supermercado, com análise exploratória de vendas usando **SQL** e **Data Visualization**, aplicando técnicas aprendidas nos cursos do Google.
+Dashboard de análise de vendas desenvolvido com foco em **performance comercial**, **comportamento de vendas ao longo do tempo** e **distribuição de receita por categoria e região**.
 
 ---
 
 ## 🎯 Objetivo do Projeto
-Criar uma análise completa das vendas do supermercado, identificando padrões de compra, comportamento dos clientes e insights para tomada de decisão.
+
+Analisar dados históricos de vendas de um supermercado para responder perguntas de negócio como:
+
+- Quais categorias e subcategorias geram mais receita?
+- Como a receita evolui ao longo do tempo?
+- Qual a relação entre volume de pedidos e ticket médio?
+- Quais regiões apresentam maior e menor faturamento?
+- Onde existem oportunidades de crescimento?
 
 ---
 
-## 🟢 Perguntas de Negócio
+## 📂 Dataset
 
-| Pergunta | Resposta |
-|-----------|----------|
-| Qual filial vende mais? | Nova York |
-| Quais dias da semana têm maior faturamento? | Sábado |
-| Quais linhas de produto são mais vendidas? | Office Supplies |
-| Ticket médio por categoria | Tech: 544.73<br>Furniture: 421.92<br>Office Supplies: 191.90 |
-| Qual segmento gera mais vendas? |Tecnologia|
-| Qual categoria tem maior número de pedidos? | Office Supplies |
-| Média de dias entre ordem e envio | 4 |
-
----
-
-## 🟠 Limpeza de Dados (Prepare Data)
-Técnicas aplicadas:
-
-- `TRIM()` → remover espaços desnecessários  
-- `SUBSTR()` → corrigir cidades, códigos etc.  
-- `LENGTH()` → detectar inconsistências  
-- `CAST()` → transformar preços (string → real)  
-- `DISTINCT` → remover duplicatas  
-- `DATE()` → extrair data  
-- `COALESCE()` → lidar com valores nulos  
+- **Fonte:** Supermarket Sales Dataset  
+- **Período:** 2015 a 2018  
+- **Principais campos:**
+  - Order Date
+  - Category
+  - Sub-Category
+  - Region
+  - Sales
+  - Customer ID
+  - Order ID
 
 ---
 
-## 🟤 Transformações SQL
-Colunas e métricas criadas:
+## 🛠️ Ferramentas Utilizadas
 
-- Receita total  
-- Dia da semana  
-- Ticket médio 
+- **Tableau Public** – criação do dashboard interativo  
+- **Excel / CSV** – preparação inicial dos dados  
+- **Conceitos de SQL** – definição de métricas analíticas  
 
 ---
-## 📊 Dashboard no Looker Studio
 
-👉 [Clique aqui para ver o Dashboard] https://lookerstudio.google.com/reporting/deef5b0e-f46e-44a4-aa86-f60ae9761d38
+## 📐 Métricas e KPIs Criados
 
+- Receita Total  
+- Clientes Únicos  
+- Total de Pedidos  
+- Ticket Médio  
+- Receita por Categoria  
+- Top 10 Subcategorias por Receita  
+- Receita Total por Região  
+- Evolução Mensal da Receita  
+- Quantidade de Pedidos por Categoria  
 
-## 🟡 Principais Consultas SQL
+---
 
-### 1️⃣ Qual a cidade que mais vende?
+## 📊 Visualizações Desenvolvidas
 
-```sql
-SELECT  
-    cidade,
-    SUM(vendas) AS totalVendas
-FROM
-    supermercado
-GROUP BY
-    cidade 
-ORDER BY 
-    totalVendas DESC;
-2️⃣ Qual dia da semana tem maior faturamento?
-sql
-Copiar código
-SELECT   
-    CASE strftime('%w', 
-        substr(dataOrdem, 7,4) || '-' || 
-        substr(dataOrdem, 4,2) || '-' || 
-        substr(dataOrdem, 1,2))
-        WHEN '0' THEN 'Domingo'
-        WHEN '1' THEN 'Segunda-feira'
-        WHEN '2' THEN 'Terça-feira'
-        WHEN '3' THEN 'Quarta-feira'
-        WHEN '4' THEN 'Quinta-feira'
-        WHEN '5' THEN 'Sexta-feira'
-        WHEN '6' THEN 'Sábado'
-    END AS nome_dia,
-    SUM(vendas) AS total_vendas
-FROM
-    supermercado
-GROUP BY 
-    nome_dia
-ORDER BY
-    total_vendas DESC;
-3️⃣ Qual categoria tem maior valor de vendas?
-sql
-Copiar código
-SELECT 
-    categoriaProduto,
-    SUM(vendas) AS totalVendas
-FROM
-    supermercado
-GROUP BY
-    categoriaProduto
-ORDER BY 
-    totalVendas DESC;
-🟩 Dashboard (Looker Studio)
-Principais métricas e visualizações:
+- **KPIs de visão geral**
+- **Evolução mensal da receita (2015–2018)**
+- **Distribuição da receita por categoria**
+- **Top 10 subcategorias com maior receita**
+- **Receita total por região**
+- **Ticket médio por categoria**
+- **Quantidade de pedidos por categoria**
+- **Filtros interativos por Ano, Categoria e Região**
 
-🏢 Filial com maior faturamento
+🔗 **Dashboard no Tableau Public:**  
+👉 https://public.tableau.com/views/Supermarket_17684137520730/Painel1?:language=pt-BR&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
 
-📦 Método de envio mais utilizado
+---
 
-💰 Ticket médio de vendas
+## 🔍 Principais Insights
 
-🛍️ Vendas por categoria
+### 📌 Distribuição da Receita
+A categoria **Furniture** concentra a maior parcela da receita total, superando Technology e Office Supplies, indicando maior geração de valor agregado.
 
-🟧 Insights do Negócio (Storytelling)
-🏢 A filial de Nova York é a mais rentável.
+### 📌 Subcategorias com maior faturamento
+As subcategorias **Bookcases**, **Chairs** e **Phones** lideram a receita, reforçando móveis e tecnologia como principais motores do faturamento.
 
-📅 Sábado é o dia com maior faturamento.
+### 📌 Análise Regional
+A região **West** apresenta o maior faturamento total, enquanto a região **South** possui menor participação, indicando potencial de expansão.
 
-🚚 O método de envio mais utilizado é Standard, pelo custo-benefício.
+### 📌 Ticket Médio x Volume
+- **Office Supplies** lidera em volume de pedidos, porém apresenta menor ticket médio.
+- **Furniture** possui menor volume, mas maior ticket médio, caracterizando vendas de maior valor agregado.
 
-💻 A linha mais lucrativa é Electronic Accessories.
+---
 
+## 📈 Conclusão
 
+Este projeto demonstra como dados de vendas podem ser transformados em **insights estratégicos**, auxiliando decisões relacionadas a:
 
+- Mix de produtos  
+- Estratégia comercial por região  
+- Análise de desempenho ao longo do tempo  
+- Equilíbrio entre volume e valor de vendas  
 
+Mais do que criar gráficos, o foco foi **traduzir dados em informações acionáveis para o negócio**.
+
+---
+
+## 👤 Autor
+
+**Lucas José**  
+🔗 LinkedIn: https://www.linkedin.com/in/lucasjosedepaula  
+🌐 Portfólio: https://lucasjose.lovable.app  
+📊 Tableau Public: https://public.tableau.com/views/Supermarket_17684137520730/Painel1?:language=pt-BR&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
+
+---
