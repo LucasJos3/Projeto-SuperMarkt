@@ -66,6 +66,7 @@ Analisar dados históricos de vendas de um supermercado para responder perguntas
 
 🔗 **Dashboard no Tableau Public:**  
 👉 https://public.tableau.com/views/Supermarket_17684137520730/Painel1?:language=pt-BR&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
+<img width="2111" height="1088" alt="Painel 1" src="https://github.com/user-attachments/assets/8ae1e4e8-036f-4fd2-9e29-9fbe1b862df8" />
 
 ---
 
